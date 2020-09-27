@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Home, Register, Login } from "./pages";
+import { Home, AddTodo, EditTodo, Todos } from "./pages";
 import { Navbar } from './components'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from "react-redux";
 import store from "./store/index";
+import './assets/scss/styles.scss'
 
 const routes = [
   {
@@ -13,12 +13,16 @@ const routes = [
     children: <Home />
   },
   {
-    path: "/login",
-    children: <Login />
+    path: "/todos",
+    children: <Todos />
   },
   {
-    path: "/register",
-    children: <Register />
+    path: "/addTOdo",
+    children: <AddTodo />
+  },
+  {
+    path: "/editTodo/:id",
+    children: <EditTodo />
   }
 ];
 

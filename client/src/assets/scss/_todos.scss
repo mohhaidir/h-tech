@@ -1,0 +1,20 @@
+.container-todos {
+    
+    .todos-title {
+        text-align: center;
+        margin: 40px;
+
+        .todos-text {
+            font-family: Fondamento;
+        }
+    }
+
+    .todos-card {
+        justify-content: center;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+}

@@ -4,53 +4,26 @@ const {
 
 class ControllerUser {
     static postTodo(req, res) {
-        const data = req.body
-        data.userId = req.dataUser.id
-        Todo.create(data)
-            .then(result => {
-                res.status(201).json({
-                    result
-                })
+        Todo.create(req.body)
+            .then(data => {
+                res.status(201).json(data);
             })
             .catch(err => {
-                if (err.errors) {
-                    res.status(400).json({
-                        errors: err.errors
-                    })
-                } else {
-                    res.status(500).json({
-                        errors: err
-                    })
-                }
-            })
+                res.status(500).json(err);
+            });
     }
 
     static getTodos(req, res) {
-        const userId = Number(req.dataUser.id)
-        Todo.findAll({
-                where: {
-                    userId: userId
-                }
-            })
+        Todo.findAll()
             .then(result => {
-                res.status(200).json({
-                    result: result
-                })
+                res.status(200).json(result);
             })
             .catch(err => {
-                if (err.errors) {
-                    res.status(400).json({
-                        errors: err.errors
-                    })
-                } else {
-                    res.status(500).json({
-                        errors: err
-                    })
-                }
-            })
+                res.status(500).json(err);
+            });
     }
 
-    static getTodo(req, res, next) {
+    static getTodo(req, res) {
         const id = Number(req.params.id)
         Todo.findOne({
                 where: {
@@ -63,11 +36,11 @@ class ControllerUser {
                 })
             })
             .catch(err => {
-                next(err)
+                res.status(500).json(err);
             })
     }
 
-    static putTodo(req, res, next) {
+    static putTodo(req, res) {
         const id = Number(req.params.id)
         const data = req.body
 
@@ -82,11 +55,11 @@ class ControllerUser {
                 })
             })
             .catch(err => {
-                next(err)
+                res.status(500).json(err);
             })
     }
 
-    static deleteTodo(req, res, next) {
+    static deleteTodo(req, res) {
         const id = Number(req.params.id)
         let deletedData = null
         Todo.findByPk(id)
@@ -104,7 +77,7 @@ class ControllerUser {
                 })
             })
             .catch(err => {
-                next(err)
+                res.status(500).json(err);
             })
     }
 }
